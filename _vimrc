@@ -90,7 +90,6 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:asyncrun_open = 11
 
 if !has("gui_running")
-    "set term=xterm
     set t_Co=256
 endif
 
