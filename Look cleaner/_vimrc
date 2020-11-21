@@ -1,0 +1,4 @@
+source $VIMRUNTIME/../.config/vim_plugs.vim
+source $VIMRUNTIME/../.config/settings.vim
+source $VIMRUNTIME/../.config/map_key.vim
+source $VIMRUNTIME/../.config/beautiful.vim
