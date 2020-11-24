@@ -14,6 +14,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'powerline/powerline'
 Plug 'ryanoasis/vim-devicons'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 "Plugins for themes
 Plug 'morhetz/gruvbox'

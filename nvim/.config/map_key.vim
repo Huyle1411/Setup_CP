@@ -3,6 +3,9 @@ let g:ycm_enable_diagnostic_signs=0
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:asyncrun_open = 11
 
+vnoremap > >gv
+vnoremap < <gv
+
 nnoremap <silent> <Leader>yy :YcmCompleter GoTo<CR>
 nnoremap <silent> <Leader>yr :YcmCompleter GoToReferences<CR>
 nnoremap <Leader>yd :YcmDiags<CR>
@@ -21,9 +24,9 @@ tnoremap <silent> <C-[><C-[> <C-\><C-n>
 " Map <CR> to :nohl, except in quickfix windows
 nnoremap <silent> <expr> <CR> &buftype ==# 'quickfix' ? "\<CR>" : ":nohl\<CR>"
 
-let g:AutoPairsShortcutToggle = '<F3>'
+let g:AutoPairsShortcutToggle = '<F6>'
 
-call togglebg#map("<F2>")
+call togglebg#map("<F8>")
 map <F7> :NERDTreeToggle<CR>
 
 "Map key for compile and run code

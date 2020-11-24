@@ -9,6 +9,7 @@ au VimEnter * if !&diff | tab all | tabfirst | endif
 au GUIEnter * simalt ~x
 autocmd GUIEnter * set visualbell t_vb=
 "au BufAdd,BufNewFile * nested tab sball
+autocmd BufEnter * silent! lcd %:p:h
 autocmd TermOpen * set bufhidden=hide
 autocmd TermOpen * startinsert
 
@@ -43,6 +44,9 @@ set wildmenu
 set lazyredraw
 set updatetime=200
 set ttimeoutlen=50
+set nobackup
+set nowritebackup
+let NERDTreeQuitOnOpen=1
 syntax enable
 filetype plugin indent on
 
