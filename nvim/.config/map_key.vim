@@ -26,12 +26,12 @@ nnoremap <silent> <expr> <CR> &buftype ==# 'quickfix' ? "\<CR>" : ":nohl\<CR>"
 
 let g:AutoPairsShortcutToggle = '<F6>'
 
-call togglebg#map("<F8>")
+"call togglebg#map("<F8>")
 map <F7> :NERDTreeToggle<CR>
 
 "Map key for compile and run code
-autocmd filetype cpp nnoremap <silent> <F9> :w <bar> AsyncRun g++ -g -std=c++17 -D_DEBUG -O2 -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unused-result -Wno-sign-conversion %:r.cpp -o %:r<CR>
+autocmd filetype cpp nnoremap <silent> <F9> :w <bar> AsyncRun g++ -g -std=c++17 -D_DEBUG -O2 -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unused-result -Wno-sign-conversion %:r.cpp -o %:r <CR>
 autocmd filetype python nnoremap <F9> :w <bar> !start cmd /c py % & pause<CR>
 "autocmd filetype cpp nnoremap <F10> :!start cmd /c %:r & pause <CR>
-autocmd filetype cpp nnoremap <F10> : vsplit term:// %:r <CR>
+autocmd filetype cpp nnoremap <F8> :vs \| term ./%:r <CR>
 autocmd filetype cpp nnoremap <F5> :%y+<CR>

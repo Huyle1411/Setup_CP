@@ -37,7 +37,6 @@ set guicursor+=a:blinkon0
 set noerrorbells visualbell t_vb=
 set belloff=all
 set showtabline=2
-set splitright splitbelow
 set hidden
 set noswapfile
 set wildmenu
@@ -48,6 +47,5 @@ set nobackup
 set nowritebackup
 let NERDTreeQuitOnOpen=1
 syntax enable
+syntax on
 filetype plugin indent on
-
-let g:gitgutter_git_executable = 'C:\Program Files\Git\bin\git.exe'

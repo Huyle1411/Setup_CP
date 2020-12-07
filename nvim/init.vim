@@ -19,9 +19,9 @@
 "____________`$$$$$$$$$$$$$$$$$$$$$$$$´_
 "_______________`$$$$$$$$$$$$$$$$$$$$´_
 
-
-
-source $VIMRUNTIME/../.config/vim_plugs.vim
-source $VIMRUNTIME/../.config/settings.vim
-source $VIMRUNTIME/../.config/map_key.vim
-source $VIMRUNTIME/../.config/beautiful.vim
+source $HOME/.config/nvim/settings/vim_plugs.vim
+source $HOME/.config/nvim/settings/settings.vim
+source $HOME/.config/nvim/settings/map_key.vim
+source $HOME/.config/nvim/settings/beautiful.vim
+source $HOME/.config/nvim/settings/startify_config.vim
+source $HOME/.config/nvim/settings/fzfconfig.vim

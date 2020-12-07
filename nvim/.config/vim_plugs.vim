@@ -2,7 +2,7 @@
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 "C:\Program Files (x86)\Vim\bundle
-call plug#begin('C:/Program Files (x86)/Vim/bundle')
+call plug#begin('~/.config/nvim/autoload/plugged')
 
 " Make sure you use single quotes
 
@@ -32,8 +32,14 @@ Plug 'valloric/youcompleteme'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'mhinz/vim-startify'
+Plug 'unblevable/quick-scope' 
 
 "Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+
+"FZF
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
 call plug#end()
