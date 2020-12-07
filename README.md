@@ -1,7 +1,7 @@
 # Vim-config
 My vim configuration
 
-1. Requirement
+1. Requirement on Windows
 
     Install vim-plug
 
