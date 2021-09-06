@@ -13,7 +13,6 @@ autocmd VimEnter * set bufhidden=hide
 autocmd VimEnter * set vb t_vb=
 "autocmd VimEnter * startinsert
 "autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-au BufWrite * :Autoformat
 autocmd BufEnter * silent! lcd %:p:h
 
 let g:templates_no_autocmd = 1
@@ -53,10 +52,16 @@ set wak=no
 syntax enable
 filetype plugin indent on
 
-let g:formatterpath = ['C:\Users\huy2.le\Documents\vimws\script\.clang-format']
-
 " Makes bash open in the working directory
 let $CHERE_INVOKING=1
+"clang-format
+map <C-K> :py3f C:\Program Files\LLVM\share\clang\clang-format.py<cr>
+imap <C-K> <c-o>:py3f C:\Program Files\LLVM\share\clang\clang-format.py<cr>
+function! Formatonsave()
+	let l:lines="all"
+	py3f C:\Program Files\LLVM\share\clang\clang-format.py
+endfunction
+autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
 
 " Default path for Cygwin 64-bit, change accordingly
 set shell=C:\cygwin64\bin\bash.exe
