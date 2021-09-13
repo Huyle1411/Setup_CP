@@ -41,7 +41,7 @@ map <F7> :NERDTreeToggle<CR>
 
 "Map key for compile and run code
 "autocmd filetype cpp nnoremap <silent> <F9> :w <bar> !g++ -g -std=c++17 -D_DEBUG -O2 -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unused-result -Wno-sign-conversion %:r.cpp -o %:r && %:r<CR>
-autocmd filetype cpp nnoremap <silent> <F9> :w <bar> !printf '\e[1;32m================  Compiling...  ================\n\e[0m' && time g++ -g -std=c++17 -D_DEBUG -O2 -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unused-result -Wno-sign-conversion %:r.cpp -o %:r && printf '\e[1;32m================   Running...   ================\n\e[0m' && ./%:r <CR>
+autocmd filetype cpp nnoremap <silent> <F9> :w <bar> !printf '\e[1;32m================  Compiling...  ================\n\e[0m' && time g++ -Wl,-stack=268435456 -g -std=c++17 -D_DEBUG -O2 -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unused-result -Wno-sign-conversion %:r.cpp -o %:r && printf '\e[1;32m================   Running...   ================\n\e[0m' && ./%:r <CR>
 "autocmd filetype cpp nnoremap <silent> <F9> :w <bar> AsyncRun g++ -g -std=c++14 -D_DEBUG -O2 -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wcast-qual -Wcast-align -Wno-unused-result -Wno-sign-conversion %:r.cpp -o %:r<CR>
 autocmd filetype python nnoremap <F9> :w <bar> !start cmd /c py % & pause<CR>
 if has("gui_running")
