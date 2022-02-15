@@ -1,4 +1,10 @@
 Need to install Vundle to use Vim plugins
+
+Lines to place in .bashrc:
+
+- ulimit -s unlimited (Removes stack size limit)
+- export PATH=$PATH:~/scripts/ (Enables scripts)
+
 Scripts (place in ~/scripts)
 - build.sh
 
