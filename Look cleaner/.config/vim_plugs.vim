@@ -2,32 +2,36 @@
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 "C:\Program Files (x86)\Vim\bundle
-call plug#begin('C:/Program Files (x86)/Vim/bundle')
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " Make sure you use single quotes
+Plugin 'VundleVim/Vundle.vim'
 
 "Plugins for interface
-Plug 'jiangmiao/auto-pairs'
-"Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'luochen1990/rainbow'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-airline/vim-airline'
-Plug 'powerline/powerline'
-Plug 'ryanoasis/vim-devicons'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'luochen1990/rainbow'
+Plugin 'bfrg/vim-cpp-modern'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline'
+Plugin 'powerline/powerline'
+Plugin 'ryanoasis/vim-devicons'
 
 "Plugins for themes
-Plug 'morhetz/gruvbox'
-Plug 'altercation/vim-colors-solarized'
+Plugin 'morhetz/gruvbox'
 
 "Plugins for browse file
-Plug 'scrooloose/nerdtree'
+Plugin 'preservim/nerdtree'
 
 "Plugins for functions
-Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'aperezdc/vim-template'
-Plug 'valloric/youcompleteme'
-Plug 'skywind3000/asyncrun.vim'
+Plugin 'preservim/nerdcommenter'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'valloric/youcompleteme'
+Plugin 'searleser97/cpbooster.vim'
+Plugin 'skywind3000/asyncrun.vim'
+"Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
-call plug#end()
+call vundle#end()
