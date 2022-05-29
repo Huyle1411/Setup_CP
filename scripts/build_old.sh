@@ -15,7 +15,7 @@ fi
 
 if [[ $DEBUG -eq 1 ]]; then
 	echo "the DEBUG flags is on"
-	CXXFLAGS+="${DEBUG_CXXFLAGS} ${DEBUG_LOCAL_CXXFLAGS}"
+	CXXFLAGS+=" ${DEBUG_CXXFLAGS} ${DEBUG_LOCAL_CXXFLAGS}"
 fi
 
-g++ $CXXFLAGS -o $filename.out $filename.cpp
+g++ $CXXFLAGS -o $filename $filename.cpp

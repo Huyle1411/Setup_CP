@@ -6,17 +6,13 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Make sure you use single quotes
-Plugin 'VundleVim/Vundle.vim'
 
 "Plugins for interface
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'luochen1990/rainbow'
-Plugin 'bfrg/vim-cpp-modern'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-airline/vim-airline'
-Plugin 'powerline/powerline'
 Plugin 'ryanoasis/vim-devicons'
 
 "Plugins for themes
@@ -26,12 +22,15 @@ Plugin 'morhetz/gruvbox'
 Plugin 'preservim/nerdtree'
 
 "Plugins for functions
-Plugin 'preservim/nerdcommenter'
+"Plugin 'preservim/nerdcommenter'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'valloric/youcompleteme'
 Plugin 'searleser97/cpbooster.vim'
-Plugin 'skywind3000/asyncrun.vim'
-"Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'tpope/vim-dispatch.git'
+Plugin 'gabrielsimoes/cfparser.vim'
+Plugin 'voldikss/vim-floaterm'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'mh21/errormarker.vim'
 
 call vundle#end()
