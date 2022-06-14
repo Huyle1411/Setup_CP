@@ -21,7 +21,6 @@ do
 	if diff -B -F --label --side-by-side $expected_file $output_file > dont_show_on_terminal.txt; then
 		echo "Test case $test_case: ${bold}${green}Accepted${reset}"
 		right_answer=$((right_answer+1))
-		test_case=$((test_case+1))
 		rm $output_file
 	else
 		echo "Test case $test_case: ${bold}${red}Wrong Answer${reset}"
@@ -37,6 +36,7 @@ do
 		cat $expected_file
 		echo ""
 	fi
+	test_case=$((test_case+1))
 done
 
 echo "Testing complete!"
