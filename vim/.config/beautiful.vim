@@ -14,9 +14,9 @@ au Syntax * RainbowParenthesesLoadBraces
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 "theme
-set background=light
-colorscheme gruvbox
-let g:airline_theme='gruvbox'
+" set background=light
+colorscheme dracula
+let g:airline_theme='dracula'
 
 "----- Customize for vim-airlines -----"
 "enable tabline

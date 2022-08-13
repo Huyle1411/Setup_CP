@@ -51,10 +51,11 @@ set wak=no
 set clipboard=unnamedplus
 syntax enable
 filetype plugin indent on
-
+let g:neoterm_autoinsert=1
+let g:neoterm_repl_python=['python3']
 "Append template to new C++ files
 autocmd BufNewFile *.cpp 0r /home/huyle/library/template.cpp
-
+let g:ycm_global_ycm_extra_conf = '~/Setup_CP/.ycm_extra_conf.py'
 "" Makes bash open in the working directory
 let $CHERE_INVOKING=1
 "clang-format

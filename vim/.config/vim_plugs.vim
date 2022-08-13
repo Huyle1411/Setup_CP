@@ -14,15 +14,9 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-airline/vim-airline'
 Plugin 'ryanoasis/vim-devicons'
-
-"Plugins for themes
+Plugin 'dracula/vim', { 'name': 'dracula' }
 Plugin 'morhetz/gruvbox'
-
-"Plugins for browse file
 Plugin 'preservim/nerdtree'
-
-"Plugins for functions
-"Plugin 'preservim/nerdcommenter'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'valloric/youcompleteme'
@@ -32,5 +26,6 @@ Plugin 'gabrielsimoes/cfparser.vim'
 Plugin 'voldikss/vim-floaterm'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'mh21/errormarker.vim'
+Plugin 'kassio/neoterm'
 
 call vundle#end()

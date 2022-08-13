@@ -50,10 +50,15 @@ autocmd filetype cpp nnoremap <F9> :w <bar> Make <CR>
 autocmd filetype cpp nnoremap <S-F9> :w <bar> :vs term://build.sh %:r -d :startinsert<CR>
 " autocmd filetype cpp nnoremap <F9> :w <bar> :vs term://build.sh %:r -d :startinsert<CR>
 autocmd filetype cpp nnoremap <C-F9> :w <bar> :vs term://build.sh %:r :startinsert<CR>
-autocmd filetype cpp nnoremap <F10> : vs term://./%:r <bar> :startinsert<CR>
+" autocmd filetype cpp nnoremap <F10> : vs term://./%:r <bar> :startinsert<CR>
+autocmd filetype cpp nnoremap <F8> :vert T ./%:r<CR>
+autocmd filetype cpp nnoremap <F10> :vert T h -t<CR>
 autocmd filetype cpp nnoremap <C-F10> :w <bar> :vs term://build.sh %:r -d -r 5 :startinsert <CR>
 
 let g:floaterm_keymap_toggle = '<F12>'
 let g:floaterm_keymap_new = '<Leader>ft'
 let g:floaterm_width = 0.8
 let g:floaterm_height = 0.8
+
+let g:neoterm_autojump = 1
+nnoremap <Leader>tc :Tclose<CR>
