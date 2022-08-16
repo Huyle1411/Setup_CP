@@ -33,7 +33,7 @@ def listen_once(*, timeout=None):
             nonlocal json_data
             json_data = json.load(self.rfile)
 
-    with http.server.HTTPServer(('127.0.0.1', 10046), CompetitiveCompanionHandler) as server:
+    with http.server.HTTPServer(('127.0.0.1', 12345), CompetitiveCompanionHandler) as server:
         server.timeout = timeout
         server.handle_request()
 
