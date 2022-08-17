@@ -17,4 +17,4 @@ set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
 
 # add_compile_options(-Wall -Wextra -pedantic -Werror)
 # add the executable
-add_executable(test hello.cpp)
+add_executable(test test.cpp)
