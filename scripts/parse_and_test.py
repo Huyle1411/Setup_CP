@@ -144,7 +144,10 @@ def make_prob(data, name=None):
 
 def run_prob():
     RUN_PROB = 'run_problem.sh'
-    EXECUTE_FILE = 'sol'
+    EXECUTE_FILE = 'PROBLEM_NAME'
+    for file in os.listdir("./"):
+        if file.endswith(".cpp"):
+            EXECUTE_FILE = os.path.splitext(file)[0]
     try:
         subprocess.check_call([RUN_PROB, EXECUTE_FILE], stdout=sys.stdout, stderr=sys.stderr)
     except subprocess.CalledProcessError as e:
@@ -165,17 +168,6 @@ def main():
                 os.remove(filename)
         print("Done clean all")
     elif arguments['--test']:
-        if os.path.exists("./sol"):
-            print(Fore.MAGENTA + "Skip compile!" + Fore.RESET)
-        else:
-            print(Fore.MAGENTA + "Compile solution" + Fore.RESET)
-            COMPILE_SOLUTION = Path(sys.path[0]) / 'build_old.sh'
-            try:
-                compile_result = subprocess.check_call([COMPILE_SOLUTION, 'sol.cpp'], stdout=sys.stdout, stderr=sys.stderr)
-            except subprocess.CalledProcessError as e:
-                print(Fore.RED + f"Error Compilation {e}" + Fore.RESET)
-                return
-
         run_prob()
     else:
         dryrun = arguments['--dryrun']
