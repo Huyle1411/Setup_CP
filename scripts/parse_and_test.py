@@ -130,7 +130,7 @@ def make_prob(data, name=None):
     else:
         print(f"Creating problem {name}...")
 
-        MAKE_PROB = Path(sys.path[0]) / 'make_problem.sh'
+        MAKE_PROB = Path(sys.path[0]) / 'make_problem_cmake.sh'
         try:
             subprocess.check_call([MAKE_PROB, name], stdout=sys.stdout, stderr=sys.stderr)
         except subprocess.CalledProcessError as e:
