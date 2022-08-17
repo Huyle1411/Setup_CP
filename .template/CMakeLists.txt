@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # set the project name
-project(test)
+project(PROBLEM_NAME)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -17,4 +17,4 @@ set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
 
 # add_compile_options(-Wall -Wextra -pedantic -Werror)
 # add the executable
-add_executable(test test.cpp)
+add_executable(PROBLEM_NAME PROBLEM_NAME.cpp)
