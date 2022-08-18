@@ -148,6 +148,7 @@ def run_prob():
     for file in os.listdir("./"):
         if file.endswith(".cpp"):
             EXECUTE_FILE = os.path.splitext(file)[0]
+    EXECUTE_FILE="build/"+EXECUTE_FILE
     try:
         subprocess.check_call([RUN_PROB, EXECUTE_FILE], stdout=sys.stdout, stderr=sys.stderr)
     except subprocess.CalledProcessError as e:
