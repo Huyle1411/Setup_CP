@@ -32,7 +32,7 @@ set relativenumber
 set backspace=indent,eol,start
 set splitright splitbelow
 set title
-set laststatus=2
+set laststatus=3
 set noshowmode
 set encoding=utf-8
 set conceallevel=2
@@ -52,18 +52,22 @@ set clipboard=unnamedplus
 syntax enable
 filetype plugin indent on
 let g:neoterm_autoinsert=1
-let g:neoterm_repl_python=['python3']
 "Append template to new C++ files
-autocmd BufNewFile *.cpp 0r /home/huyle/library/template.cpp
-let g:ycm_global_ycm_extra_conf = '~/Setup_CP/.ycm_extra_conf.py'
+autocmd BufNewFile *.cpp 0r .template/template.cpp
+" Let clangd fully control code completion
+" let g:ycm_clangd_uses_ycmd_caching = 0
+" Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+" let g:ycm_clangd_binary_path = exepath("clangd")
+" let g:ycm_global_ycm_extra_conf = '~/Setup_CP/.ycm_extra_conf.py'
+" let g:ycm_clangd_args = ['-log=verbose', '-pretty']
 "" Makes bash open in the working directory
 let $CHERE_INVOKING=1
 "clang-format
-map <C-K> :py3f ~/../../usr/share/clang/clang-format-10/clang-format.py<cr>
-imap <C-K> <c-o>:py3f ~/../../usr/share/clang/clang-format-10/clang-format.py<cr>
+map <C-K> :py3f /usr/share/clang/clang-format-14/clang-format.py<cr>
+imap <C-K> <c-o>:py3f /usr/share/clang/clang-format-14/clang-format.py<cr>
 function! Formatonsave()
-	let l:lines="all"
-	py3f ~/../../usr/share/clang/clang-format-10/clang-format.py
+	let l:formatdiff = 1
+	py3f /usr/share/clang/clang-format-14/clang-format.py
 endfunction
 autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
 
@@ -83,3 +87,4 @@ if executable(s:clip)
             \ set number |
             \ let g:loaded_matchparen=1 |
 
+let &errorformat="%f:%l:%c: %t%*[^:]:%m,%f:%l: %t%*[^:]:%m," . &errorformat
