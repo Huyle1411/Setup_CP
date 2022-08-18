@@ -19,8 +19,10 @@ for filepath in "$@"; do
 		sed -i "s/PROBLEM_NAME/$PROBLEM_NAME/g" "$filepath"/CMakeLists.txt
 		
 		# Run cmake
-		cd "$filepath/"
-		cmake .
-		cd ..
+    BUILD_DIR="${filepath}/build"
+    mkdir "$BUILD_DIR"
+		cd "$BUILD_DIR"
+		cmake ..
+		cd ../..
 done
 
