@@ -2,20 +2,21 @@
 """Download and setup problems from Competitive Companion
 Usage:
   download_prob.py --echo
-  download_prob.py [<name>... | -n <number> | -b <batches> | --second <second>] [--dryrun]
+  download_prob.py [<name>... | -n <number> | -b <batches> | --second <second>] [--dryrun] [-m]
   download_prob.py [-t | -c]
 
 Options:
-  -h --help     Show this screen.
-  --echo        Just echo received responses and exit.
-  --dryrun      Don't actually create any problems
+  -h --help                     Show this screen.
+  --echo                        Just echo received responses and exit.
+  --dryrun                      Don't actually create any problems
+  -t , --test                   Test solution.
+  -c , --clean                  Clean sample input and output.
+  -m , --make_problem           Make problem folder only.
 
 Download limit options:
   -n COUNT, --number COUNT      Number of problems.
   -b COUNT, --batches COUNT     Number of batches. (Default 1 batch)
   -s SECOND, --second SECOND    Timeout for listening to problems. in seconds
-  -t , --test                   Test solution.
-  -c , --clean                  Clean sample input and output
 
 """
 
@@ -118,6 +119,9 @@ def save_samples(data, prob_dir):
 def make_prob(data, name=None):
     if name is None:
         name = get_prob_name(data)
+        if data is None:
+            print("Unexpected error...")
+            return
 
     prob_dir = Path('.')/name
 
@@ -137,8 +141,9 @@ def make_prob(data, name=None):
             print(f"Got error {e}")
             return
 
-    print("Saving samples...")
-    save_samples(data, prob_dir)
+    if data != None:
+        print("Saving samples...")
+        save_samples(data, prob_dir)
 
     print()
 
@@ -172,6 +177,7 @@ def main():
         run_prob()
     else:
         dryrun = arguments['--dryrun']
+        make_prob_only = arguments['--make_problem']
         def run_make_prob(*args, **kwargs):
             nonlocal dryrun
             if dryrun:
@@ -180,9 +186,13 @@ def main():
             make_prob(*args, **kwargs)
 
         if names := arguments['<name>']:
-            datas = listen_many(num_items=len(names))
-            for data, name in zip(datas, names):
-                run_make_prob(data, name)
+            if not make_prob_only:
+                datas = listen_many(num_items=len(names))
+                for data, name in zip(datas, names):
+                    run_make_prob(data, name)
+            else:
+                for name in names:
+                    run_make_prob(None, name)
         elif cnt := arguments['--number']:
             cnt = int(cnt)
             datas = listen_many(num_items=cnt)
@@ -198,6 +208,10 @@ def main():
             datas = listen_many(second=second)
             for data in datas:
                 run_make_prob(data)
+        elif names := arguments['--make_problem']:
+            print(len(names))
+            for name in names:
+                run_make_prob(None, name)
         else:
             datas = listen_many(num_batches=1)
             for data in datas:
