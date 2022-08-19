@@ -23,6 +23,10 @@ for filepath in "$@"; do
     mkdir "$BUILD_DIR"
 		cd "$BUILD_DIR"
 		cmake ..
-		cd ../..
+
+    # Build the first time for precompiled header
+    echo "First built for precompiled header, maybe slower than normal"
+    make "$PROBLEM_NAME"
+    cd ../../
 done
 
