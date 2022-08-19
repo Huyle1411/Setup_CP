@@ -18,3 +18,7 @@ set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
 # add_compile_options(-Wall -Wextra -pedantic -Werror)
 # add the executable
 add_executable(PROBLEM_NAME PROBLEM_NAME.cpp)
+target_precompile_headers(PROBLEM_NAME
+  PRIVATE
+    /usr/include/x86_64-linux-gnu/c++/11/bits/stdc++.h
+)

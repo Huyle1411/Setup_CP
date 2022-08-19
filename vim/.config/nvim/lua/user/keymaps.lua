@@ -38,7 +38,7 @@ keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 vim.cmd([[nnoremap <silent> <expr> <CR> &buftype ==# 'quickfix' ? "\<CR>" : ":nohl\<CR>"]])
 
 --Compile and run
-vim.opt.makeprg = "cd build && make"
+vim.opt.makeprg = "cd build && time make"
 keymap("n", "<F5>", ":%y+ <CR>", opts)
 keymap("i", "<F5>", "<ESC> :%y+ <CR>", opts)
 keymap("n", "<F8>", ":vert T cd build && ./%:r <CR>", opts)
