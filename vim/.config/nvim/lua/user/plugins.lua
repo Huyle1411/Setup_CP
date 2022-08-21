@@ -55,7 +55,7 @@ return packer.startup(function(use)
   use 'vim-airline/vim-airline'
   use 'tpope/vim-repeat'
   use 'tpope/vim-surround'
-  use 'valloric/youcompleteme'
+  -- use 'valloric/youcompleteme'
   use 'tpope/vim-dispatch'
   use {
     'numToStr/Comment.nvim',
@@ -63,7 +63,7 @@ return packer.startup(function(use)
         require('Comment').setup()
     end
   }
-  use 'mh21/errormarker.vim'
+  -- use 'mh21/errormarker.vim'
   use 'kassio/neoterm'
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
@@ -72,6 +72,8 @@ return packer.startup(function(use)
       require("toggleterm").setup()
     end
   }
+  use 'nvim-lualine/lualine.nvim'
+  use "lukas-reineke/indent-blankline.nvim"
 
   -- Colorschemes
 	use 'dracula/vim'
@@ -97,6 +99,26 @@ return packer.startup(function(use)
       }
     end
   }
+
+    -- cmp plugins
+  use "hrsh7th/nvim-cmp" -- The completion plugin
+  use "hrsh7th/cmp-buffer" -- buffer completions
+  use "hrsh7th/cmp-path" -- path completions
+  use "saadparwaiz1/cmp_luasnip" -- snippet completions
+  use "hrsh7th/cmp-nvim-lsp"
+
+  -- snippets
+  use "L3MON4D3/LuaSnip" --snippet engine
+  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+
+    -- LSP
+  use "neovim/nvim-lspconfig" -- enable LSP
+  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use "RRethy/vim-illuminate"
+
+  -- Git
+  use 'lewis6991/gitsigns.nvim'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

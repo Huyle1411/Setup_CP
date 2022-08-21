@@ -1,6 +1,6 @@
 vim.opt.clipboard = "unnamedplus"           
 vim.opt.cmdheight = 1                           
--- vim.opt.completeopt = { "menuone", "noselect" }
+vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.conceallevel = 2                        -- so that `` is visible in markdown files
 vim.opt.fileencoding = "utf-8"                  -- the encoding written to a file
 vim.opt.hlsearch = true                         -- highlight all matches on previous search pattern
@@ -15,7 +15,7 @@ vim.opt.splitbelow = true                       -- force all horizontal splits t
 vim.opt.splitright = true                       -- force all vertical splits to go to the right of current window
 vim.opt.swapfile = false                        -- creates a swapfile
 vim.opt.termguicolors = true                    -- set term gui colors (most terminals support this)
-vim.opt.timeoutlen = 1000                       -- time to wait for a mapped sequence to complete (in milliseconds)
+vim.opt.timeoutlen = 500                       -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.undofile = true                         -- enable persistent undo
 vim.opt.updatetime = 300                        -- faster completion (4000ms default)
 vim.opt.expandtab = true                        -- convert tabs to spaces
@@ -65,13 +65,16 @@ vim.cmd([[
 -- colorscheme
 vim.o.background = 'dark'
 vim.cmd "colorscheme dracula"
+vim.cmd([[
+let g:airline_theme='dracula'
+]])
 
 -- Highlight Yanked Text
-vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-  callback = function()
-    vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+--   callback = function()
+--     vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
+--   end,
+-- })
 
 -- treesitter
 local status_ok, configs = pcall(require, "nvim-treesitter.configs")
@@ -91,6 +94,10 @@ configs.setup({
 	indent = { enable = true, disable = { "python", "css" } },
 })
 
+-- python3 env
+vim.cmd([[
+let g:python3_host_prog = "/usr/bin/python3"
+]])
 
 ----- Customize for vim-airlines -----
 --enable tabline
@@ -100,18 +107,28 @@ vim.cmd([[
   let g:airline_powerline_fonts = 1
 ]])
 
-vim.cmd([[
-  highlight Cursor guifg=white guibg=green
-  highlight iCursor guifg=white guibg=green
-  set guicursor=n-v:block-Cursor
-  set guicursor+=i-c:ver10-iCursor
-  set guicursor+=n-v-c-i:blinkon0
-]])
+-- vim.cmd([[
+--   highlight Cursor guifg=white guibg=green
+--   highlight iCursor guifg=white guibg=green
+--   set guicursor=n-v:block-Cursor
+--   set guicursor+=i-c:ver10-iCursor
+--   set guicursor+=n-v-c-i:blinkon0
+-- ]])
 
 -- custome icon youcompleteme
 vim.cmd([[
 let g:ycm_error_symbol = ''
 let g:ycm_warning_symbol = ''
-let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+]])
+
+vim.cmd([[
+  let g:dracula_bold = 1
+  let g:dracula_italic = 1
+  let g:dracula_underline = 1
+  let g:dracula_undercurl = 1
+  let g:dracula_full_special_attrs_support = 1
+  let g:dracula_inverse = 1
+  let g:dracula_colorterm = 1
 ]])

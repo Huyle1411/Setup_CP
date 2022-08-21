@@ -46,6 +46,11 @@ keymap("n", "<F9>", ":w <bar> Make <CR>", opts)
 keymap("i", "<F9>", "<ESC> :w <bar> Make <CR>", opts)
 keymap("n", "<F10>", ":vert T h -t <CR>", opts)
 
+keymap("n", "<leader>c", ":%y+ <CR>", opts)
+keymap("n", "<leader>r", ":vert T cd build && ./%:r <CR>", opts)
+keymap("n", "<leader>b", ":w <bar> Make <CR>", opts)
+keymap("n", "<leader>t", ":vert T h -t <CR>", opts)
+
 -- NvimTree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
