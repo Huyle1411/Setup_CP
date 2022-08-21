@@ -54,13 +54,14 @@ vim.cmd([[
   let g:neoterm_autoinsert = 1
 ]])
 
-vim.cmd([[
-  function! Formatonsave()
-    let l:formatdiff = 1
-    py3f /usr/share/clang/clang-format-14/clang-format.py
-  endfunction
-  autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
-]])
+-- use format in lsp
+-- vim.cmd([[
+--   function! Formatonsave()
+--     let l:formatdiff = 1
+--     py3f /usr/share/clang/clang-format-14/clang-format.py
+--   endfunction
+--   autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
+-- ]])
 
 -- colorscheme
 vim.o.background = 'dark'
@@ -107,13 +108,13 @@ vim.cmd([[
   let g:airline_powerline_fonts = 1
 ]])
 
--- vim.cmd([[
---   highlight Cursor guifg=white guibg=green
---   highlight iCursor guifg=white guibg=green
---   set guicursor=n-v:block-Cursor
---   set guicursor+=i-c:ver10-iCursor
---   set guicursor+=n-v-c-i:blinkon0
--- ]])
+vim.cmd([[
+  highlight Cursor guifg=white guibg=green
+  highlight iCursor guifg=white guibg=green
+  set guicursor=n-v:block-Cursor
+  set guicursor+=i-c:ver10-iCursor
+  set guicursor+=n-v-c-i:blinkon0
+]])
 
 -- custome icon youcompleteme
 vim.cmd([[

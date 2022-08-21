@@ -7,6 +7,7 @@ end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+M.capabilities.offsetEncoding = { "utf-16" }
 M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
 
 M.setup = function()
@@ -72,6 +73,20 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
+  if client.name == "clangd" then
+    client.resolved_capabilities.document_formatting = false
+  end
+
+  -- vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+  -- vim.api.nvim_create_autocmd("BufWritePre", {
+  --     group = augroup,
+  --     buffer = bufnr,
+  --     callback = function()
+  --         -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+  --         vim.lsp.buf.formatting()
+  --     end,
+  -- })
+
   lsp_keymaps(bufnr)
   local status_ok, illuminate = pcall(require, "illuminate")
   if not status_ok then

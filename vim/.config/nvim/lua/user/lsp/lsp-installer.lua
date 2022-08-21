@@ -5,6 +5,7 @@ end
 
 local servers = {
   "clangd",
+  "cmake",
 }
 
 lsp_installer.setup({
