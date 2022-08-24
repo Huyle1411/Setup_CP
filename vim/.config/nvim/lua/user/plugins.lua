@@ -74,9 +74,17 @@ return packer.startup(function(use)
   }
   use 'nvim-lualine/lualine.nvim'
   use "lukas-reineke/indent-blankline.nvim"
+  use "akinsho/bufferline.nvim"
+  use "moll/vim-bbye"
+  use { 'lewis6991/impatient.nvim',
+    config = function()
+      require('impatient')
+    end
+  }
 
   -- Colorschemes
 	use 'dracula/vim'
+  use 'folke/tokyonight.nvim'
   -- Telescope
   -- use { "nvim-telescope/telescope.nvim", commit = "d96eaa914aab6cfc4adccb34af421bdd496468b0" }
 

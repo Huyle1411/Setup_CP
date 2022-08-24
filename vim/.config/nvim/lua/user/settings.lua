@@ -10,7 +10,7 @@ vim.opt.pumheight = 10                          -- pop up menu height
 vim.opt.showmode = false                        -- we don't need to see things like -- INSERT -- anymore
 vim.opt.showtabline = 2                         -- always show tabs
 vim.opt.smartcase = true                        -- smart case
-vim.opt.smartindent = true                      -- make indenting smarter again
+-- vim.opt.smartindent = true                      -- make indenting smarter again
 vim.opt.splitbelow = true                       -- force all horizontal splits to go below current window
 vim.opt.splitright = true                       -- force all vertical splits to go to the right of current window
 vim.opt.swapfile = false                        -- creates a swapfile
@@ -44,38 +44,18 @@ vim.cmd([[
 ]])
 
 vim.cmd([[
-  au VimEnter * if !&diff | tab all | tabfirst | endif
-  au GUIEnter * simalt ~x
-  autocmd GUIEnter * set visualbell t_vb=
-  autocmd VimEnter * set bufhidden=hide
-  autocmd VimEnter * set vb t_vb=
   autocmd BufEnter * silent! lcd %:p:h
   autocmd BufNewFile *.cpp 0r /home/huyle/library/template.cpp
   let g:neoterm_autoinsert = 1
 ]])
 
--- use format in lsp
--- vim.cmd([[
---   function! Formatonsave()
---     let l:formatdiff = 1
---     py3f /usr/share/clang/clang-format-14/clang-format.py
---   endfunction
---   autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
--- ]])
-
 -- colorscheme
 vim.o.background = 'dark'
+-- vim.g.tokyonight_style = "storm"
 vim.cmd "colorscheme dracula"
-vim.cmd([[
-let g:airline_theme='dracula'
-]])
-
--- Highlight Yanked Text
--- vim.api.nvim_create_autocmd({ "TextYankPost" }, {
---   callback = function()
---     vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
---   end,
--- })
+-- vim.cmd([[
+-- let g:airline_theme='dracula'
+-- ]])
 
 -- treesitter
 local status_ok, configs = pcall(require, "nvim-treesitter.configs")
@@ -103,8 +83,7 @@ let g:python3_host_prog = "/usr/bin/python3"
 ----- Customize for vim-airlines -----
 --enable tabline
 vim.cmd([[
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#formatter = 'default'
+  let g:airline#extensions#tabline#enabled = 0
   let g:airline_powerline_fonts = 1
 ]])
 
@@ -124,12 +103,3 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 ]])
 
-vim.cmd([[
-  let g:dracula_bold = 1
-  let g:dracula_italic = 1
-  let g:dracula_underline = 1
-  let g:dracula_undercurl = 1
-  let g:dracula_full_special_attrs_support = 1
-  let g:dracula_inverse = 1
-  let g:dracula_colorterm = 1
-]])

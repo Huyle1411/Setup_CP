@@ -23,9 +23,12 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
--- Navigate buffers
-keymap("n", "<Tab>", ":bnext<CR>", opts)
-keymap("n", "<S-Tab>", ":bprevious<CR>", opts)
+--- Navigate buffers
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
+
+-- Close buffers
+keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
@@ -36,6 +39,9 @@ keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Map <CR> to :nohl, except in quickfix windows
 vim.cmd([[nnoremap <silent> <expr> <CR> &buftype ==# 'quickfix' ? "\<CR>" : ":nohl\<CR>"]])
+
+-- tnoremap <silent> <C-[><C-[> <C-\><C-n>
+keymap("t", "<ESC><ESC>", "<C-\\><C-n>", opts)
 
 --Compile and run
 vim.opt.makeprg = "cd build && time make"
