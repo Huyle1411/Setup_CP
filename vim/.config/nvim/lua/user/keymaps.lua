@@ -47,15 +47,18 @@ keymap("t", "<ESC><ESC>", "<C-\\><C-n>", opts)
 vim.opt.makeprg = "cd build && time make"
 keymap("n", "<F5>", ":%y+ <CR>", opts)
 keymap("i", "<F5>", "<ESC> :%y+ <CR>", opts)
-keymap("n", "<F8>", ":vert T cd build && ./%:r <CR>", opts)
+-- keymap("n", "<F8>", ":vert T cd build && ./%:r <CR>", opts)
+keymap("n", "<F8>", ":TermExec cmd=\"./%:r\" dir=build <CR>", opts)
 keymap("n", "<F9>", ":w <bar> Make <CR>", opts)
 keymap("i", "<F9>", "<ESC> :w <bar> Make <CR>", opts)
 keymap("n", "<F10>", ":vert T h -t <CR>", opts)
 
 keymap("n", "<leader>c", ":%y+ <CR>", opts)
-keymap("n", "<leader>r", ":vert T cd build && ./%:r <CR>", opts)
+-- keymap("n", "<leader>r", ":vert T cd build && ./%:r <CR>", opts)
+keymap("n", "<leader>r", ":TermExec cmd=\"./%:r\" dir=build <CR>", opts)
 keymap("n", "<leader>b", ":w <bar> Make <CR>", opts)
-keymap("n", "<leader>t", ":vert T h -t <CR>", opts)
+-- keymap("n", "<leader>t", ":vert T h -t <CR>", opts)
+keymap("n", "<leader>t", ":TermExec cmd=\"h -t\" go_back=0 <CR>", opts)
 
 -- NvimTree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
