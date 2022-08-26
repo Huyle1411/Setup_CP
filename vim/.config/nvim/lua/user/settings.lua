@@ -103,3 +103,17 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 ]])
 
+vim.cmd([[
+let g:clipboard = {
+      \   'name': 'win32yank-wsl',
+      \   'copy': {
+      \      '+': '/path-file/win32yank.exe -i --crlf',
+      \      '*': '/path-file/win32yank.exe -i --crlf',
+      \    },
+      \   'paste': {
+      \      '+': '/path-file/win32yank.exe -o --lf',
+      \      '*': '/path-file/win32yank.exe -o --lf',
+      \   },
+      \   'cache_enabled': 0,
+      \ }
+]])
