@@ -1,9 +1,9 @@
 #!/ usr / bin / env python3
 """Download and setup problems from Competitive Companion
 Usage:
-  download_prob.py --echo
-  download_prob.py [<name>... | -n <number> | -b <batches> | --second <second>] [--dryrun] [-m]
-  download_prob.py [-t | -c]
+  parse_and_test.py --echo
+  parse_and_test.py [<name>... | -n <number> | -b <batches> | --second <second>] [--dryrun] [-m|-t]
+  parse_and_test.py [-c]
 
 Options:
   -h --help                     Show this screen.
@@ -147,13 +147,18 @@ def make_prob(data, name=None):
 
     print()
 
-def run_prob():
+def run_prob(names):
     RUN_PROB = 'run_problem.sh'
     EXECUTE_FILE = 'PROBLEM_NAME'
-    for file in os.listdir("./"):
-        if file.endswith(".cpp"):
-            EXECUTE_FILE = os.path.splitext(file)[0]
+    if(names is None):
+        for file in os.listdir("./"):
+            if file.endswith(".cpp"):
+                EXECUTE_FILE = os.path.splitext(file)[0]
+    else:
+        for name in names:
+            EXECUTE_FILE = name.split(".")[0]
     EXECUTE_FILE="build/"+EXECUTE_FILE
+    print(EXECUTE_FILE)
     try:
         subprocess.check_call([RUN_PROB, EXECUTE_FILE], stdout=sys.stdout, stderr=sys.stderr)
     except subprocess.CalledProcessError as e:
@@ -173,11 +178,10 @@ def main():
             else:
                 os.remove(filename)
         print("Done clean all")
-    elif arguments['--test']:
-        run_prob()
     else:
         dryrun = arguments['--dryrun']
         make_prob_only = arguments['--make_problem']
+        test_problem = arguments['--test']
         def run_make_prob(*args, **kwargs):
             nonlocal dryrun
             if dryrun:
@@ -186,7 +190,9 @@ def main():
             make_prob(*args, **kwargs)
 
         if names := arguments['<name>']:
-            if not make_prob_only:
+            if test_problem:
+                run_prob(names)
+            elif not make_prob_only:
                 datas = listen_many(num_items=len(names))
                 for data, name in zip(datas, names):
                     run_make_prob(data, name)
