@@ -10,7 +10,7 @@ vim.opt.pumheight = 10                          -- pop up menu height
 vim.opt.showmode = false                        -- we don't need to see things like -- INSERT -- anymore
 vim.opt.showtabline = 2                         -- always show tabs
 vim.opt.smartcase = true                        -- smart case
--- vim.opt.smartindent = true                      -- make indenting smarter again
+vim.opt.smartindent = true                      -- make indenting smarter again
 vim.opt.splitbelow = true                       -- force all horizontal splits to go below current window
 vim.opt.splitright = true                       -- force all vertical splits to go to the right of current window
 vim.opt.swapfile = false                        -- creates a swapfile
@@ -35,8 +35,8 @@ vim.opt.wrap = false                            -- display lines as one long lin
 vim.opt.scrolloff = 8                           -- is one of my fav
 vim.opt.sidescrolloff = 8
 vim.opt.fillchars.eob=" "
-vim.opt.shortmess:append "c"
-vim.opt.whichwrap:append("<,>,[,],h,l")
+-- vim.opt.shortmess:append "c"
+-- vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
 
 vim.cmd([[
@@ -103,17 +103,3 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 ]])
 
-vim.cmd([[
-let g:clipboard = {
-      \   'name': 'win32yank-wsl',
-      \   'copy': {
-      \      '+': '/path-file/win32yank.exe -i --crlf',
-      \      '*': '/path-file/win32yank.exe -i --crlf',
-      \    },
-      \   'paste': {
-      \      '+': '/path-file/win32yank.exe -o --lf',
-      \      '*': '/path-file/win32yank.exe -o --lf',
-      \   },
-      \   'cache_enabled': 0,
-      \ }
-]])

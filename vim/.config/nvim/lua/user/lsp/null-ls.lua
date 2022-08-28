@@ -15,7 +15,7 @@ null_ls.setup {
   sources = {
     formatting.clang_format ,
     -- diagnostics.cppcheck.with { extra_args = { "--enable=warning", "--style", "--performance", "--protability" } },
-    diagnostics.cppcheck.with { extra_args = { "--enable=warning,style,performance,portability", } },
+    -- diagnostics.cppcheck.with { extra_args = { "--enable=warning,style,performance,portability", } },
   },
 
   -- you can reuse a shared lspconfig on_attach callback here
