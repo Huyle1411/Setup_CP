@@ -81,6 +81,8 @@ return packer.startup(function(use)
       require('impatient')
     end
   }
+  use "ahmedkhalf/project.nvim"
+  use "nvim-telescope/telescope.nvim"
 
   -- Colorschemes
 	use 'dracula/vim'

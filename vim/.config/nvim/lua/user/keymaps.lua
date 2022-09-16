@@ -69,3 +69,9 @@ keymap("n", "<leader>yr", ":YcmCompleter GoToReferences<CR>", opts)
 keymap("n", "<leader>yd", ":YcmDiags<CR>", opts)
 keymap("n", "<leader>yf", ":YcmCompleter FixIt<CR>", opts)
 keymap("n", "<leader>y:", ":YcmCompleter<Space>", opts)
+
+-- Telescope
+keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
+keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
