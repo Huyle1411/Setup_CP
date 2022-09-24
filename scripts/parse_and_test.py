@@ -32,7 +32,7 @@ import colorama
 from colorama import Fore
 import os
 
-#Returns unmarshalled or None
+# Returns unmarshalled or None
 def listen_once(*, second=None):
     json_data = None
 
@@ -41,7 +41,9 @@ def listen_once(*, second=None):
             nonlocal json_data
             json_data = json.load(self.rfile)
 
-    with http.server.HTTPServer(('127.0.0.1', 12345), CompetitiveCompanionHandler) as server:
+    with http.server.HTTPServer(
+        ("127.0.0.1", 12345), CompetitiveCompanionHandler
+    ) as server:
         server.second = second
         server.handle_request()
 
@@ -50,6 +52,7 @@ def listen_once(*, second=None):
     else:
         print("Got no data")
     return json_data
+
 
 def listen_many(*, num_items=None, num_batches=None, second=None):
     if num_items is not None:
@@ -68,9 +71,9 @@ def listen_many(*, num_items=None, num_batches=None, second=None):
             cur = listen_once(second=None)
             res.append(cur)
 
-            cur_batch = cur['batch']
-            batch_id = cur_batch['id']
-            batch_cnt = cur_batch['size']
+            cur_batch = cur["batch"]
+            batch_id = cur_batch["id"]
+            batch_cnt = cur_batch["size"]
             if batch_id not in batches:
                 batches[batch_id] = [batch_cnt, batch_cnt]
             assert batches[batch_id][0] > 0
@@ -86,36 +89,43 @@ def listen_many(*, num_items=None, num_batches=None, second=None):
         res.append(cnd)
     return res
 
-NAME_PATTERN = re.compile(r'^(?:Problem )?([A-Z][0-9]*)\b')
+
+NAME_PATTERN = re.compile(r"^(?:Problem )?([A-Z][0-9]*)\b")
+
 
 def get_prob_name(data):
-    if 'USACO' in data['group']:
-        if 'fileName' in data['input']:
-            names = [data['input']['fileName'].rstrip('.in'), data['output']['fileName'].rstrip('.out')]
+    if "USACO" in data["group"]:
+        if "fileName" in data["input"]:
+            names = [
+                data["input"]["fileName"].rstrip(".in"),
+                data["output"]["fileName"].rstrip(".out"),
+            ]
             if len(set(names)) == 1:
                 return names[0]
 
-    if 'url' in data and data['url'].startswith('https://www.codechef.com'):
-        return data['url'].rstrip('/').rsplit('/')[-1]
+    if "url" in data and data["url"].startswith("https://www.codechef.com"):
+        return data["url"].rstrip("/").rsplit("/")[-1]
 
-    patternMatch = NAME_PATTERN.search(data['name'])
+    patternMatch = NAME_PATTERN.search(data["name"])
     if patternMatch is not None:
         return patternMatch.group(1)
 
     print(f"For data: {json.dumps(data, indent=2)}")
     return input("What name to give? ")
 
+
 def save_samples(data, prob_dir):
-    with open(prob_dir / 'problem.json', 'w') as f:
+    with open(prob_dir / "problem.json", "w") as f:
         json.dump(data, f)
 
-    for i, t in enumerate(data['tests'], start=1):
-        with open(prob_dir / f'sample{i}.in', 'w') as f:
-            f.write(t['input'])
-        with open(prob_dir / f'sample{i}.out', 'w') as f:
-            f.write(t['output'])
+    for i, t in enumerate(data["tests"], start=1):
+        with open(prob_dir / f"sample{i}.in", "w") as f:
+            f.write(t["input"])
+        with open(prob_dir / f"sample{i}.out", "w") as f:
+            f.write(t["output"])
 
-#Providing name = '.'
+
+# Providing name = '.'
 def make_prob(data, name=None):
     if name is None:
         name = get_prob_name(data)
@@ -123,20 +133,22 @@ def make_prob(data, name=None):
             print("Unexpected error...")
             return
 
-    prob_dir = Path('.')/name
+    prob_dir = Path(".") / name
 
-    if name == '.':
+    if name == ".":
         print("Using current directory...")
         pass
     elif prob_dir.exists() and prob_dir.is_dir():
-#Skip making it
+        # Skip making it
         print(f"Already created problem {name}...")
     else:
         print(f"Creating problem {name}...")
 
-        MAKE_PROB = Path(sys.path[0]) / 'make_problem_cmake.sh'
+        MAKE_PROB = Path(sys.path[0]) / "make_problem_cmake.sh"
         try:
-            subprocess.check_call([MAKE_PROB, name], stdout=sys.stdout, stderr=sys.stderr)
+            subprocess.check_call(
+                [MAKE_PROB, name], stdout=sys.stdout, stderr=sys.stderr
+            )
         except subprocess.CalledProcessError as e:
             print(f"Got error {e}")
             return
@@ -147,41 +159,46 @@ def make_prob(data, name=None):
 
     print()
 
+
 def run_prob(names):
-    RUN_PROB = 'run_problem.sh'
-    EXECUTE_FILE = 'PROBLEM_NAME'
-    if(names is None):
+    RUN_PROB = "run_problem.sh"
+    EXECUTE_FILE = "PROBLEM_NAME"
+    if names is None:
         for file in os.listdir("./"):
             if file.endswith(".cpp"):
                 EXECUTE_FILE = os.path.splitext(file)[0]
     else:
         for name in names:
             EXECUTE_FILE = name.split(".")[0]
-    EXECUTE_FILE="build/"+EXECUTE_FILE
+    EXECUTE_FILE = "build/" + EXECUTE_FILE
     print(EXECUTE_FILE)
     try:
-        subprocess.check_call([RUN_PROB, EXECUTE_FILE], stdout=sys.stdout, stderr=sys.stderr)
+        subprocess.check_call(
+            [RUN_PROB, EXECUTE_FILE], stdout=sys.stdout, stderr=sys.stderr
+        )
     except subprocess.CalledProcessError as e:
         print(f"Got error {e}")
         return
 
+
 def main():
     arguments = docopt(__doc__)
 
-    if arguments['--echo']:
+    if arguments["--echo"]:
         while True:
             print(listen_once())
-    elif arguments['--clean']:
+    elif arguments["--clean"]:
         for filename in os.listdir("./"):
-            if filename.endswith('.cpp'):
+            if filename.endswith(".cpp"):
                 continue
             else:
                 os.remove(filename)
         print("Done clean all")
     else:
-        dryrun = arguments['--dryrun']
-        make_prob_only = arguments['--make_problem']
-        test_problem = arguments['--test']
+        dryrun = arguments["--dryrun"]
+        make_prob_only = arguments["--make_problem"]
+        test_problem = arguments["--test"]
+
         def run_make_prob(*args, **kwargs):
             nonlocal dryrun
             if dryrun:
@@ -189,7 +206,7 @@ def main():
                 return
             make_prob(*args, **kwargs)
 
-        if names := arguments['<name>']:
+        if names := arguments["<name>"]:
             if test_problem:
                 run_prob(names)
             elif not make_prob_only:
@@ -199,22 +216,22 @@ def main():
             else:
                 for name in names:
                     run_make_prob(None, name)
-        elif cnt := arguments['--number']:
+        elif cnt := arguments["--number"]:
             cnt = int(cnt)
             datas = listen_many(num_items=cnt)
             for data in datas:
                 run_make_prob(data)
-        elif batches := arguments['--batches']:
+        elif batches := arguments["--batches"]:
             batches = int(batches)
             datas = listen_many(num_batches=batches)
             for data in datas:
                 run_make_prob(data)
-        elif second := arguments['--second']:
+        elif second := arguments["--second"]:
             second = float(second)
             datas = listen_many(second=second)
             for data in datas:
                 run_make_prob(data)
-        elif names := arguments['--make_problem']:
+        elif names := arguments["--make_problem"]:
             print(len(names))
             for name in names:
                 run_make_prob(None, name)
@@ -223,5 +240,6 @@ def main():
             for data in datas:
                 run_make_prob(data)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

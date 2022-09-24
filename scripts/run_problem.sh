@@ -37,7 +37,7 @@ do
 		echo ""
 
     echo "${blue}Output: ${reset}${CUSTOMTAB}${blue}Expected: ${reset}"
-    colordiff -y <(grep -vE '^\s*$' $expected_file) <(grep -vE '^\s*$' $output_file)
+    colordiff -y <(grep -vE '^\s*$' $output_file) <(grep -vE '^\s*$' $expected_file)
 
 		# cat $output_file
 		# echo ""
