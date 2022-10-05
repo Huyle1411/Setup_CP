@@ -26,7 +26,7 @@ do
 	expected_file="${filename}.out"
 	./$execute_file < $input_file > $output_file
 	# if diff -w -B -F --label --side-by-side $expected_file $output_file > dont_show_on_terminal.txt; then
-  if diff <(grep -vE '^\s*$' $expected_file) <(grep -vE '^\s*$' $output_file) > dont_show_on_terminal.txt; then
+  if diff -Z -B <(grep -vE '^\s*$' $expected_file) <(grep -vE '^\s*$' $output_file) > dont_show_on_terminal.txt; then
 		echo "Test case $test_case: ${bold}${green}Accepted${reset}"
 		right_answer=$((right_answer+1))
 		rm $output_file
