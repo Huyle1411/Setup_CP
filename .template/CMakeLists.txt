@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # set the project name
-project(PROBLEM_NAME)
+project(SOLUTION)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -14,10 +14,3 @@ set(CMAKE_CXX_FLAGS "${CXXFLAGS} ${DEBUG_CXXFLAGS} ${DEBUG_LOCAL_CXXFLAGS}")
 
 # generate compilation database
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
-
-# add the executable
-add_executable(PROBLEM_NAME PROBLEM_NAME.cpp)
-target_precompile_headers(PROBLEM_NAME
-  PRIVATE
-    /usr/include/x86_64-linux-gnu/c++/11/bits/stdc++.h
-)

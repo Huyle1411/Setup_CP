@@ -31,8 +31,12 @@ import re
 import colorama
 from colorama import Fore
 import os
+import shutil
 
 # Returns unmarshalled or None
+root_name = "PROBLEM_NAME"
+
+
 def listen_once(*, second=None):
     json_data = None
 
@@ -144,10 +148,10 @@ def make_prob(data, name=None):
     else:
         print(f"Creating problem {name}...")
 
-        MAKE_PROB = Path(sys.path[0]) / "make_problem_cmake.sh"
+        MAKE_PROB = Path(sys.path[0]) / "make_problem.sh"
         try:
             subprocess.check_call(
-                [MAKE_PROB, name], stdout=sys.stdout, stderr=sys.stderr
+                [MAKE_PROB, name, root_name], stdout=sys.stdout, stderr=sys.stderr
             )
         except subprocess.CalledProcessError as e:
             print(f"Got error {e}")
@@ -163,14 +167,14 @@ def make_prob(data, name=None):
 def run_prob(names):
     RUN_PROB = "run_problem.sh"
     EXECUTE_FILE = "PROBLEM_NAME"
-    if names is None:
-        for file in os.listdir("./"):
-            if file.endswith(".cpp"):
-                EXECUTE_FILE = os.path.splitext(file)[0]
-    else:
-        for name in names:
-            EXECUTE_FILE = name.split(".")[0]
-    EXECUTE_FILE = "build/" + EXECUTE_FILE
+    # if names is None:
+    # for file in os.listdir("./"):
+    #     if file.endswith(".cpp"):
+    #         EXECUTE_FILE = os.path.splitext(file)[0]
+    # else:
+    for name in names:
+        EXECUTE_FILE = name.split(".")[0]
+    # EXECUTE_FILE = "build/" + EXECUTE_FILE
     print(EXECUTE_FILE)
     try:
         subprocess.check_call(
@@ -181,7 +185,23 @@ def run_prob(names):
         return
 
 
+def create_project():
+    project_dir = Path(".") / "Solution"
+
+    # create project folder
+    if project_dir.exists():
+        print("Already created project")
+    else:
+        Path("Solution").mkdir(parents=True, exist_ok=False)
+        print("Create project Solution")
+    os.chdir("Solution")
+    # config for vscode
+    Path(".vscode").mkdir(parents=True, exist_ok=True)
+    shutil.copy(Path.home() / "Setup_CP/.template/tasks.json", ".vscode")
+
+
 def main():
+    global root_name
     arguments = docopt(__doc__)
 
     if arguments["--echo"]:
@@ -207,13 +227,16 @@ def main():
             make_prob(*args, **kwargs)
 
         if names := arguments["<name>"]:
+            root_name = names[0]
             if test_problem:
                 run_prob(names)
             elif not make_prob_only:
+                create_project()
                 datas = listen_many(num_items=len(names))
                 for data, name in zip(datas, names):
                     run_make_prob(data, name)
             else:
+                create_project()
                 for name in names:
                     run_make_prob(None, name)
         elif cnt := arguments["--number"]:
@@ -231,10 +254,9 @@ def main():
             datas = listen_many(second=second)
             for data in datas:
                 run_make_prob(data)
-        elif names := arguments["--make_problem"]:
-            print(len(names))
-            for name in names:
-                run_make_prob(None, name)
+        # elif names := arguments["--make_problem"]:
+        #     for name in names:
+        #         run_make_prob(None, name)
         else:
             datas = listen_many(num_batches=1)
             for data in datas:
