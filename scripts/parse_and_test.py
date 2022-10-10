@@ -196,8 +196,7 @@ def create_project():
         print("Create project Solution")
     os.chdir("Solution")
     # config for vscode
-    Path(".vscode").mkdir(parents=True, exist_ok=True)
-    shutil.copy(Path.home() / "Setup_CP/.template/tasks.json", ".vscode")
+    shutil.copytree(Path.home() / "Setup_CP/.template/.vscode", ".vscode")
 
 
 def main():
