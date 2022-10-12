@@ -196,7 +196,10 @@ def create_project():
         print("Create project Solution")
     os.chdir("Solution")
     # config for vscode
-    shutil.copytree(Path.home() / "Setup_CP/.template/.vscode", ".vscode")
+    if (Path(".") / ".vscode").exists():
+        print("Exists folder .vscode")
+    else:
+        shutil.copytree(Path.home() / "Setup_CP/.template/.vscode", ".vscode")
 
 
 def main():
