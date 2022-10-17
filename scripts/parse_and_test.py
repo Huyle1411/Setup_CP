@@ -131,6 +131,7 @@ def save_samples(data, prob_dir):
 
 # Providing name = '.'
 def make_prob(data, name=None):
+    global root_name
     if name is None:
         name = get_prob_name(data)
         if data is None:
@@ -139,6 +140,8 @@ def make_prob(data, name=None):
 
     prob_dir = Path(".") / name
 
+    if root_name == "PROBLEM_NAME" and name is not None:
+        root_name = name
     if name == ".":
         print("Using current directory...")
         pass
@@ -186,24 +189,24 @@ def run_prob(names):
 
 
 def create_project():
-    project_dir = Path(".") / "Solution"
-
-    # create project folder
-    if project_dir.exists():
-        print("Already created project")
-    else:
-        Path("Solution").mkdir(parents=True, exist_ok=False)
-        print("Create project Solution")
-    os.chdir("Solution")
+    # project_dir = Path(".") / "Solution"
+    #
+    # # create project folder
+    # if project_dir.exists():
+    #     print("Already created project")
+    # else:
+    #     Path("Solution").mkdir(parents=True, exist_ok=False)
+    #     print("Create project Solution")
+    # os.chdir("Solution")
     # config for vscode
     if (Path(".") / ".vscode").exists():
         print("Exists folder .vscode")
     else:
         shutil.copytree(Path.home() / "Setup_CP/.template/.vscode", ".vscode")
+        print("Create vscode config")
 
 
 def main():
-    global root_name
     arguments = docopt(__doc__)
 
     if arguments["--echo"]:
@@ -211,9 +214,11 @@ def main():
             print(listen_once())
     elif arguments["--clean"]:
         for filename in os.listdir("./"):
-            if filename.endswith(".cpp"):
-                continue
-            else:
+            if (
+                filename.endswith(".in")
+                or filename.endswith(".out")
+                or filename.endswith(".res")
+            ):
                 os.remove(filename)
         print("Done clean all")
     else:
@@ -229,7 +234,7 @@ def main():
             make_prob(*args, **kwargs)
 
         if names := arguments["<name>"]:
-            root_name = names[0]
+            # root_name = names[0]
             if test_problem:
                 run_prob(names)
             elif not make_prob_only:
@@ -242,6 +247,7 @@ def main():
                 for name in names:
                     run_make_prob(None, name)
         elif cnt := arguments["--number"]:
+            create_project()
             cnt = int(cnt)
             datas = listen_many(num_items=cnt)
             for data in datas:

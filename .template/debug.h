@@ -67,7 +67,7 @@ void debug_out(Head H, Tail... T) {
   debug_out(T...);
 }
 #ifdef DEBUG
-#define debug(...) std::cerr << "\033[91mLINE(" << __LINE__ << ") [" << __FUNCTION__ << "] -> " \
+#define debug(...) std::cerr << "\033[92mLINE(" << __LINE__ << ") [" << __FUNCTION__ << "] -> " \
                              << "[" << #__VA_ARGS__ << "]:",                                    \
                    debug_out(__VA_ARGS__)
 #else
