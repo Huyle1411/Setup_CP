@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
  
-cp ~/vimcp/Library/runner.py runner.py #Replace the first string with the path to runner.py!
+cp ~/SetupCP/scripts/runner.py runner.py #Replace the first string with the path to runner.py!
  
 for ((testNum=0;testNum<$3;testNum++))
 do
