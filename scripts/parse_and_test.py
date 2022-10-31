@@ -168,8 +168,6 @@ def make_prob(data, name=None):
         print("Saving samples...")
         save_samples(data, prob_dir)
 
-    print()
-
 
 def run_prob(names):
     RUN_PROB = "run_problem.sh"
@@ -222,6 +220,9 @@ def main():
         make_prob_only = arguments["--make_problem"]
         test_problem = arguments["--test"]
 
+        lang = input(
+            "Enter the language (cpp: default, java): ") or "cpp"
+
         def run_make_prob(*args, **kwargs):
             nonlocal dryrun
             if dryrun:
@@ -239,8 +240,6 @@ def main():
                 for data, name in zip(datas, names):
                     run_make_prob(data, name)
             else:
-                lang = input(
-                    "Enter the language (cpp: default, java): ") or "cpp"
                 create_project()
                 for name in names:
                     run_make_prob(None, name)
