@@ -35,6 +35,7 @@ import shutil
 
 # Returns unmarshalled or None
 root_name = "PROBLEM_NAME"
+lang = "Cpp"
 
 
 def listen_once(*, second=None):
@@ -132,6 +133,7 @@ def save_samples(data, prob_dir):
 # Providing name = '.'
 def make_prob(data, name=None):
     global root_name
+    global lang
     if name is None:
         name = get_prob_name(data)
         if data is None:
@@ -149,12 +151,14 @@ def make_prob(data, name=None):
         # Skip making it
         print(f"Already created problem {name}...")
     else:
+        print(f"Choosen language: {lang}")
         print(f"Creating problem {name}...")
 
         MAKE_PROB = Path(sys.path[0]) / "make_problem.sh"
         try:
             subprocess.check_call(
-                [MAKE_PROB, name, root_name], stdout=sys.stdout, stderr=sys.stderr
+                [MAKE_PROB, name, root_name,
+                    lang], stdout=sys.stdout, stderr=sys.stderr
             )
         except subprocess.CalledProcessError as e:
             print(f"Got error {e}")
@@ -189,15 +193,6 @@ def run_prob(names):
 
 
 def create_project():
-    # project_dir = Path(".") / "Solution"
-    #
-    # # create project folder
-    # if project_dir.exists():
-    #     print("Already created project")
-    # else:
-    #     Path("Solution").mkdir(parents=True, exist_ok=False)
-    #     print("Create project Solution")
-    # os.chdir("Solution")
     # config for vscode
     if (Path(".") / ".vscode").exists():
         print("Exists folder .vscode")
@@ -207,6 +202,7 @@ def create_project():
 
 
 def main():
+    global lang
     arguments = docopt(__doc__)
 
     if arguments["--echo"]:
@@ -243,6 +239,8 @@ def main():
                 for data, name in zip(datas, names):
                     run_make_prob(data, name)
             else:
+                lang = input(
+                    "Enter the language (cpp: default, java): ") or "cpp"
                 create_project()
                 for name in names:
                     run_make_prob(None, name)
