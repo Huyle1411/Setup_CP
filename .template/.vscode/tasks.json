@@ -4,9 +4,9 @@
     {
       "label": "test solution",
       "type": "shell",
-      "command": "python3",
+      "command": "bash",
       "args": [
-        "/home/huyle/Setup_CP/scripts/parse_and_test.py",
+        "run_problem.sh",
         "${input:target}",
         "-t"
       ]
