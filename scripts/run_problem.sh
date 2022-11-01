@@ -19,7 +19,33 @@ done
 # get target folder
 target=$1
 cd $target
-execute_file="../build/${target}"
+build_dir="../build"
+LANG=""
+
+# detect language by file extension
+if [[ -f "${target}.java" ]]; then
+  echo "detect java lang"
+  LANG="java"
+elif [[ -f "${target}.cpp" ]]; then
+  echo "detect cpp lang"
+  LANG="cpp"
+else
+  echo "cannot detect lang. Exit"
+  exit 1
+fi
+
+# if [ $# -eq 1 ]
+#   then
+#     LANG="cpp" #default
+#   else
+#     LANG=$2
+# fi
+
+if [ "$LANG" == "cpp" ]; then
+  execute_file="../build/${target}"
+elif [ "$LANG" == "java" ]; then
+  execute_file="${target}/${target}"
+fi
 
 right_answer=0
 test_case=1
@@ -39,7 +65,15 @@ do
   filename="${filename%.*}"
   output_file="${filename}.res"
   expected_file="${filename}.out"
-  ./$execute_file < $input_file > $output_file
+  
+  # run
+  if [ "$LANG" == "cpp" ]; then
+    ./$execute_file < $input_file > $output_file
+  elif [ "$LANG" == "java" ]; then
+    java -cp $build_dir $execute_file < $input_file > $output_file
+  fi
+
+  # compare output
   # if diff -w -B -F --label --side-by-side $expected_file $output_file > dont_show_on_terminal.txt; then
   if diff -Z -B <(grep -vE '^\s*$' $expected_file) <(grep -vE '^\s*$' $output_file) > dont_show_on_terminal.txt; then
     echo "Test case $test_case: ${bold}${green}Accepted${reset}"
