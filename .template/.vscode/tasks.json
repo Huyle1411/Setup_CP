@@ -10,7 +10,17 @@
         "${input:target}",
         "-t"
       ]
-    }
+    },
+    {
+      "label": "compile java",
+      "type": "shell",
+      "command": "javac",
+      "args": [
+        "-d",
+        "build",
+        "${input:target}/${input:target}.java",
+      ]
+    },
   ],
   "inputs": [
     {
