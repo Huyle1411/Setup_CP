@@ -8,7 +8,6 @@
       "args": [
         "run_problem.sh",
         "${input:target}",
-        "-t"
       ]
     },
     {
@@ -28,7 +27,7 @@
       "args": [
         "-cp",
         "build",
-        "${input:target}/${input:target}",
+        "${input:target}",
       ]
     },
   ],
