@@ -21,6 +21,16 @@
         "${input:target}/${input:target}.java",
       ]
     },
+    {
+      "label": "run java",
+      "type": "shell",
+      "command": "java",
+      "args": [
+        "-cp",
+        "build",
+        "${input:target}/${input:target}",
+      ]
+    },
   ],
   "inputs": [
     {
