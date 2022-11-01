@@ -1,4 +1,4 @@
-#!/ usr / bin / env python3
+#!/usr/bin/env python3
 """Download and setup problems from Competitive Companion
 Usage:
   parse_and_test.py --echo
@@ -191,6 +191,8 @@ def run_prob(names):
 
 
 def create_project():
+    global lang
+    lang = input("Enter the language (cpp: default, java): ") or "cpp"
     # config for vscode
     if (Path(".") / ".vscode").exists():
         print("Exists folder .vscode")
@@ -200,7 +202,6 @@ def create_project():
 
 
 def main():
-    global lang
     arguments = docopt(__doc__)
 
     if arguments["--echo"]:
@@ -219,9 +220,6 @@ def main():
         dryrun = arguments["--dryrun"]
         make_prob_only = arguments["--make_problem"]
         test_problem = arguments["--test"]
-
-        lang = input(
-            "Enter the language (cpp: default, java): ") or "cpp"
 
         def run_make_prob(*args, **kwargs):
             nonlocal dryrun
