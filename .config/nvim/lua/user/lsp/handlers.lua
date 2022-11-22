@@ -8,7 +8,7 @@ end
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = false
 M.capabilities.offsetEncoding = { "utf-16" }
-M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
+-- M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 M.setup = function()
   local signs = {
@@ -74,7 +74,7 @@ end
 
 M.on_attach = function(client, bufnr)
   if client.name == "clangd" then
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.document_formatting = false
   end
 
   -- vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
