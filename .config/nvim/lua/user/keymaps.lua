@@ -44,14 +44,14 @@ vim.cmd([[nnoremap <silent> <expr> <CR> &buftype ==# 'quickfix' ? "\<CR>" : ":no
 keymap("t", "<ESC>", "<C-\\><C-n>", opts)
 
 --Compile and run
-vim.opt.makeprg = "cd build && time make"
+vim.opt.makeprg = "cd ../build && time make"
 keymap("n", "<F5>", ":%y+ <CR>", opts)
 keymap("i", "<F5>", "<ESC> :%y+ <CR>", opts)
 -- keymap("n", "<F8>", ":vert T cd build && ./%:r <CR>", opts)
-keymap("n", "<F8>", ":TermExec cmd=\"./%:r\" dir=build <CR>", opts)
-keymap("n", "<F9>", ":w <bar> Make <CR>", opts)
-keymap("i", "<F9>", "<ESC> :w <bar> Make <CR>", opts)
-keymap("n", "<F10>", ":TermExec cmd=\"h %:r -t\" go_back=0 <CR>", opts)
+keymap("n", "<F8>", ":TermExec cmd=\"./../build/%:r\" go_back=0 <CR>", opts)
+keymap("n", "<F9>", ":w <bar> Make %:r <CR>", opts)
+keymap("i", "<F9>", "<ESC> :w <bar> Make %:r <CR>", opts)
+keymap("n", "<F10>", ":TermExec cmd=\"run_problem.sh %:r\" go_back=0 <CR>", opts)
 
 keymap("n", "<leader>c", ":%y+ <CR>", opts)
 -- keymap("n", "<leader>r", ":vert T cd build && ./%:r <CR>", opts)
