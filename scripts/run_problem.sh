@@ -18,9 +18,11 @@ done
 # target/ {target.cpp sample.in sample.out}
 # get target folder
 target=$1
-cd $target
+if [ -d "$target" ]; then
+  cd $target
+fi
 build_dir="../build"
-LANG=""
+LANG="cpp"
 
 # detect language by file extension
 if [[ -f "${target}.java" ]]; then
