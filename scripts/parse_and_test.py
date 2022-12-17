@@ -194,11 +194,11 @@ def create_project():
     global lang
     lang = input("Enter the language (cpp: default, java): ") or "cpp"
     # config for vscode
-    if (Path(".") / ".vscode").exists():
-        print("Exists folder .vscode")
-    else:
-        shutil.copytree(Path.home() / "Setup_CP/.template/.vscode", ".vscode")
-        print("Create vscode config")
+    # if (Path(".") / ".vscode").exists():
+    #     print("Exists folder .vscode")
+    # else:
+    #     shutil.copytree(Path.home() / "Setup_CP/.template/.vscode", ".vscode")
+    #     print("Create vscode config")
 
 
 def main():
