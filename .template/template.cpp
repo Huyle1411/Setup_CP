@@ -3,7 +3,7 @@ using i64 = long long;
 #ifdef DEBUG
 #include "debug.h"
 #else
-#define debug(...) 69
+#define debug(...) 66
 #endif
 
 int32_t main() {
