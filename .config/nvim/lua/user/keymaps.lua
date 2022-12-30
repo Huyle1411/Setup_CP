@@ -48,10 +48,19 @@ vim.opt.makeprg = "cd ../build && time make"
 keymap("n", "<F5>", ":%y+ <CR>", opts)
 keymap("i", "<F5>", "<ESC> :%y+ <CR>", opts)
 -- keymap("n", "<F8>", ":vert T cd build && ./%:r <CR>", opts)
-keymap("n", "<F8>", ":TermExec cmd=\"./../build/%:r\" go_back=0 <CR>", opts)
-keymap("n", "<F9>", ":w <bar> Make %:r <CR>", opts)
-keymap("i", "<F9>", "<ESC> :w <bar> Make %:r <CR>", opts)
+-- keymap("n", "<F8>", ":TermExec cmd=\"./../build/%:r\" go_back=0 <CR>", opts)
+-- keymap("n", "<F9>", ":w <bar> Make %:r <CR>", opts)
+-- keymap("i", "<F9>", "<ESC> :w <bar> Make %:r <CR>", opts)
 keymap("n", "<F10>", ":TermExec cmd=\"run_problem.sh %:r\" go_back=0 <CR>", opts)
+
+vim.cmd([[
+autocmd filetype cpp nnoremap <F9> :w <bar> Make %:r <CR>
+autocmd filetype cpp inoremap <F9> <ESC> :w <bar> Make %:r <CR>
+autocmd filetype cpp nnoremap <F8> :TermExec cmd="./../build/%:r" go_back=0 <CR>
+autocmd filetype python nnoremap <F9> :w <bar> :TermExec cmd="python3 %:r.py" go_back=0 <CR>
+autocmd filetype python inoremap <F9> <ESC> :w <bar> :TermExec cmd="python3 %:r.py" go_back=0 <CR>
+]])
+
 
 keymap("n", "<leader>c", ":%y+ <CR>", opts)
 -- keymap("n", "<leader>r", ":vert T cd build && ./%:r <CR>", opts)
