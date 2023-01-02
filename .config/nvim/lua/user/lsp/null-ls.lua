@@ -14,6 +14,9 @@ null_ls.setup {
   debug = false,
   sources = {
     formatting.clang_format ,
+    formatting.black.with { extra_args = { "--fast" } },
+    formatting.stylua,
+    diagnostics.flake8,
     -- diagnostics.cppcheck.with { extra_args = { "--enable=warning", "--style", "--performance", "--protability" } },
     -- diagnostics.cppcheck.with { extra_args = { "--enable=warning,style,performance,portability", } },
   },
@@ -27,7 +30,7 @@ null_ls.setup {
                 buffer = bufnr,
                 callback = function()
                     -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-                    vim.lsp.buf.formatting_seq_sync()
+                    vim.lsp.buf.format()
                 end,
             })
         end

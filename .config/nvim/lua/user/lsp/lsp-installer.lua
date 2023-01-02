@@ -6,6 +6,9 @@ end
 local servers = {
   "clangd",
   "cmake",
+  "sumneko_lua",
+  "pyright",
+  "bashls",
 }
 
 lsp_installer.setup({
