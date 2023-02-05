@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using i64 = long long;
 #ifdef DEBUG
-#include "debug.h"
+#include "../debug.h"
 #else
 #define debug(...) 68
 #endif
