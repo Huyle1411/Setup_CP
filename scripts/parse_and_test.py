@@ -28,10 +28,12 @@ import json
 from pathlib import Path
 import subprocess
 import re
-import colorama
-from colorama import Fore
+
+# import colorama
+# from colorama import Fore
 import os
-import shutil
+
+# import shutil
 
 # Returns unmarshalled or None
 root_name = "PROBLEM_NAME"
@@ -133,7 +135,7 @@ def save_samples(data, prob_dir):
 # Providing name = '.'
 def make_prob(data, name=None):
     global root_name
-    global lang
+    # global lang
     if name is None:
         name = get_prob_name(data)
         if data is None:
@@ -151,20 +153,19 @@ def make_prob(data, name=None):
         # Skip making it
         print(f"Already created problem {name}...")
     else:
-        print(f"Choosen language: {lang}")
+        # print(f"Choosen language: {lang}")
         print(f"Creating problem {name}...")
 
         MAKE_PROB = Path(sys.path[0]) / "make_problem.sh"
         try:
             subprocess.check_call(
-                [MAKE_PROB, name, root_name,
-                    lang], stdout=sys.stdout, stderr=sys.stderr
+                [MAKE_PROB, name, root_name], stdout=sys.stdout, stderr=sys.stderr
             )
         except subprocess.CalledProcessError as e:
             print(f"Got error {e}")
             return
 
-    if data != None:
+    if data is not None:
         print("Saving samples...")
         save_samples(data, prob_dir)
 
@@ -190,15 +191,14 @@ def run_prob(names):
         return
 
 
-def create_project():
-    global lang
-    lang = input("Enter the language (cpp: default, java): ") or "cpp"
-    # config for vscode
-    # if (Path(".") / ".vscode").exists():
-    #     print("Exists folder .vscode")
-    # else:
-    #     shutil.copytree(Path.home() / "Setup_CP/.template/.vscode", ".vscode")
-    #     print("Create vscode config")
+def prepare_build():
+    if (Path(".") / "build").exists():
+        print("Exists folder build")
+    else:
+        os.mkdir("build")
+
+    os.chdir("build")
+    os.system("cmake .. && make all")
 
 
 def main():
@@ -233,16 +233,13 @@ def main():
             if test_problem:
                 run_prob(names)
             elif not make_prob_only:
-                create_project()
                 datas = listen_many(num_items=len(names))
                 for data, name in zip(datas, names):
                     run_make_prob(data, name)
             else:
-                create_project()
                 for name in names:
                     run_make_prob(None, name)
         elif cnt := arguments["--number"]:
-            create_project()
             cnt = int(cnt)
             datas = listen_many(num_items=cnt)
             for data in datas:
@@ -264,6 +261,8 @@ def main():
             datas = listen_many(num_batches=1)
             for data in datas:
                 run_make_prob(data)
+
+        prepare_build()
 
 
 if __name__ == "__main__":
