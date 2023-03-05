@@ -135,7 +135,7 @@ def save_samples(data, prob_dir):
 # Providing name = '.'
 def make_prob(data, name=None):
     global root_name
-    # global lang
+    global lang
     if name is None:
         name = get_prob_name(data)
         if data is None:
@@ -159,7 +159,7 @@ def make_prob(data, name=None):
         MAKE_PROB = Path(sys.path[0]) / "make_problem.sh"
         try:
             subprocess.check_call(
-                [MAKE_PROB, name, root_name], stdout=sys.stdout, stderr=sys.stderr
+                [MAKE_PROB, name, root_name, lang], stdout=sys.stdout, stderr=sys.stderr
             )
         except subprocess.CalledProcessError as e:
             print(f"Got error {e}")
@@ -203,6 +203,9 @@ def prepare_build():
 
 def main():
     arguments = docopt(__doc__)
+    global lang
+    print("Enter language: ", end="")
+    lang = input()
 
     if arguments["--echo"]:
         while True:
@@ -262,7 +265,8 @@ def main():
             for data in datas:
                 run_make_prob(data)
 
-        prepare_build()
+        if lang == "cpp":
+            prepare_build()
 
 
 if __name__ == "__main__":

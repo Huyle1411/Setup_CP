@@ -31,6 +31,9 @@ if [[ -f "${target}.java" ]]; then
 elif [[ -f "${target}.cpp" ]]; then
   echo "detect cpp lang"
   LANG="cpp"
+elif [[ -f "${target}.py" ]]; then
+  echo "detect python lang"
+  LANG="python"
 else
   echo "cannot detect lang. Exit"
   exit 1
@@ -47,6 +50,8 @@ if [ "$LANG" == "cpp" ]; then
   execute_file="../build/${target}"
 elif [ "$LANG" == "java" ]; then
   execute_file="${target}/${target}"
+elif [ "$LANG" == "python" ]; then
+  execute_file="${target}.py"
 fi
 
 right_answer=0
@@ -73,6 +78,8 @@ do
     ./$execute_file < $input_file > $output_file
   elif [ "$LANG" == "java" ]; then
     java -cp $build_dir $execute_file < $input_file > $output_file
+  elif [ "$LANG" == "python" ]; then
+    pypy3 -W ignore $execute_file < $input_file > $output_file
   fi
 
   # compare output

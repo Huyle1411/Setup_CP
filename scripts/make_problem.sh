@@ -52,4 +52,8 @@ elif [ "$LANG" == "java" ]; then
   sed -i 's/Template/'$PROBLEM_NAME'/' "$filepath/"Template.java
   mv "$filepath/"Template.java "$filepath/$PROBLEM_NAME".java
   echo "created $PROBLEM_NAME.java file"
+elif [ "$LANG" == "python" ]; then
+  cp -r "$TEMPLATE_DIR/template.py" "$filepath/"
+  mv "$filepath/"template.py "$filepath/$PROBLEM_NAME".py
+  echo "created $PROBLEM_NAME.py file"
 fi

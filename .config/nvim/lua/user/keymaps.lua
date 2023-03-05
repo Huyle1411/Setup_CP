@@ -51,14 +51,16 @@ keymap("i", "<F5>", "<ESC> :%y+ <CR>", opts)
 -- keymap("n", "<F8>", ":TermExec cmd=\"./../build/%:r\" go_back=0 <CR>", opts)
 -- keymap("n", "<F9>", ":w <bar> Make %:r <CR>", opts)
 -- keymap("i", "<F9>", "<ESC> :w <bar> Make %:r <CR>", opts)
-keymap("n", "<F10>", ":TermExec cmd=\"run_problem.sh %:r\" go_back=0 <CR>", opts)
+keymap("n", "<F10>", "<ESC> :w <bar> :TermExec cmd=\"run_problem.sh %:r\" go_back=0 <CR>", opts)
 
 vim.cmd([[
 autocmd filetype cpp nnoremap <F9> :w <bar> Make %:r <CR>
 autocmd filetype cpp inoremap <F9> <ESC> :w <bar> Make %:r <CR>
 autocmd filetype cpp nnoremap <F8> :TermExec cmd="./../build/%:r" go_back=0 <CR>
-autocmd filetype python nnoremap <F9> :w <bar> :TermExec cmd="python3 %:r.py" go_back=0 <CR>
-autocmd filetype python inoremap <F9> <ESC> :w <bar> :TermExec cmd="python3 %:r.py" go_back=0 <CR>
+" autocmd filetype cpp nnoremap <F10> :TermExec cmd="run_problem.sh %:r cpp" go_back=0 <CR>
+autocmd filetype python nnoremap <F9> :w <bar> :TermExec cmd="pypy3 -W ignore %:r.py < input" go_back=0 <CR>
+autocmd filetype python inoremap <F9> <ESC> :w <bar> :TermExec cmd="pypy3 -W ignore %:r.py < input" go_back=0 <CR>
+" autocmd filetype python nnoremap <F10> :TermExec cmd="run_problem.sh %:r python" go_back=0 <CR>
 ]])
 
 
