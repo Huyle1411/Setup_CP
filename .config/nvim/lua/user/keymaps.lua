@@ -44,7 +44,7 @@ vim.cmd([[nnoremap <silent> <expr> <CR> &buftype ==# 'quickfix' ? "\<CR>" : ":no
 keymap("t", "<ESC>", "<C-\\><C-n>", opts)
 
 --Compile and run
-vim.opt.makeprg = "cd ../build && time make"
+vim.opt.makeprg = "cd build && time make"
 keymap("n", "<F5>", ":%y+ <CR>", opts)
 keymap("i", "<F5>", "<ESC> :%y+ <CR>", opts)
 -- keymap("n", "<F8>", ":vert T cd build && ./%:r <CR>", opts)
@@ -56,7 +56,7 @@ keymap("n", "<F10>", "<ESC> :w <bar> :TermExec cmd=\"run_problem.sh %:r\" go_bac
 vim.cmd([[
 autocmd filetype cpp nnoremap <F9> :w <bar> Make %:r <CR>
 autocmd filetype cpp inoremap <F9> <ESC> :w <bar> Make %:r <CR>
-autocmd filetype cpp nnoremap <F8> :TermExec cmd="./../build/%:r" go_back=0 <CR>
+autocmd filetype cpp nnoremap <F8> :TermExec cmd="./build/%:r" go_back=0 <CR>
 " autocmd filetype cpp nnoremap <F10> :TermExec cmd="run_problem.sh %:r cpp" go_back=0 <CR>
 autocmd filetype python nnoremap <F9> :w <bar> :TermExec cmd="pypy3 -W ignore %:r.py < input" go_back=0 <CR>
 autocmd filetype python inoremap <F9> <ESC> :w <bar> :TermExec cmd="pypy3 -W ignore %:r.py < input" go_back=0 <CR>
@@ -66,10 +66,10 @@ autocmd filetype python inoremap <F9> <ESC> :w <bar> :TermExec cmd="pypy3 -W ign
 
 keymap("n", "<leader>c", ":%y+ <CR>", opts)
 -- keymap("n", "<leader>r", ":vert T cd build && ./%:r <CR>", opts)
-keymap("n", "<leader>r", ":TermExec cmd=\"./%:r\" dir=build <CR>", opts)
-keymap("n", "<leader>b", ":w <bar> Make <CR>", opts)
+-- keymap("n", "<leader>r", ":TermExec cmd=\"./%:r\" dir=build <CR>", opts)
+-- keymap("n", "<leader>b", ":w <bar> Make <CR>", opts)
 -- keymap("n", "<leader>t", ":vert T h -t <CR>", opts)
-keymap("n", "<leader>t", ":TermExec cmd=\"h %:r -t\" go_back=0 <CR>", opts)
+-- keymap("n", "<leader>t", ":TermExec cmd=\"h %:r -t\" go_back=0 <CR>", opts)
 
 -- NvimTree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
