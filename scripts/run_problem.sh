@@ -21,7 +21,7 @@ target=$1
 if [ -d "$target" ]; then
   cd $target
 fi
-build_dir="../build"
+build_dir="build"
 LANG="cpp"
 
 # detect language by file extension
@@ -36,7 +36,7 @@ elif [[ -f "${target}.py" ]]; then
   LANG="python"
 else
   echo "cannot detect lang. Exit"
-  exit 1
+  exit 0
 fi
 
 # if [ $# -eq 1 ]
@@ -47,7 +47,7 @@ fi
 # fi
 
 if [ "$LANG" == "cpp" ]; then
-  execute_file="../build/${target}"
+  execute_file="build/${target}"
 elif [ "$LANG" == "java" ]; then
   execute_file="${target}/${target}"
 elif [ "$LANG" == "python" ]; then
@@ -66,7 +66,7 @@ then
   exit 0
 fi
 
-for input_file in *.in
+for input_file in "${target}_"*.in
 do
   filename=$(basename -- "$input_file")
   filename="${filename%.*}"
