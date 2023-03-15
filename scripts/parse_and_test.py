@@ -49,7 +49,7 @@ def listen_once(*, second=None):
             json_data = json.load(self.rfile)
 
     with http.server.HTTPServer(
-        ("127.0.0.1", 12345), CompetitiveCompanionHandler
+        ("127.0.0.1", 1327), CompetitiveCompanionHandler
     ) as server:
         server.second = second
         server.handle_request()
@@ -121,14 +121,14 @@ def get_prob_name(data):
     return input("What name to give? ")
 
 
-def save_samples(data, prob_dir):
+def save_samples(data, prob_dir, name):
     with open(prob_dir / "problem.json", "w") as f:
         json.dump(data, f)
 
     for i, t in enumerate(data["tests"], start=1):
-        with open(prob_dir / f"sample{i}.in", "w") as f:
+        with open(prob_dir / f"{name}_sample{i}.in", "w") as f:
             f.write(t["input"])
-        with open(prob_dir / f"sample{i}.out", "w") as f:
+        with open(prob_dir / f"{name}_sample{i}.out", "w") as f:
             f.write(t["output"])
 
 
@@ -142,18 +142,15 @@ def make_prob(data, name=None):
             print("Unexpected error...")
             return
 
-    prob_dir = Path(".") / name
+    # Using current dir, set sample name by problem in save_samples
+    prob_dir = Path(".")
 
     if root_name == "PROBLEM_NAME" and name is not None:
         root_name = name
-    if name == ".":
-        print("Using current directory...")
-        pass
-    elif prob_dir.exists() and prob_dir.is_dir():
-        # Skip making it
+    file_name = name + "." + lang
+    if os.path.exists(file_name):
         print(f"Already created problem {name}...")
     else:
-        # print(f"Choosen language: {lang}")
         print(f"Creating problem {name}...")
 
         MAKE_PROB = Path(sys.path[0]) / "make_problem.sh"
@@ -167,7 +164,7 @@ def make_prob(data, name=None):
 
     if data is not None:
         print("Saving samples...")
-        save_samples(data, prob_dir)
+        save_samples(data, prob_dir, name)
 
 
 def run_prob(names):
@@ -206,6 +203,8 @@ def main():
     global lang
     print("Enter language: ", end="")
     lang = input()
+    if lang == "":
+        lang = "cpp"
 
     if arguments["--echo"]:
         while True:
