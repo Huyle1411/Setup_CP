@@ -59,7 +59,7 @@ std::string to_string(std::tuple<A, B, C> p) { return "(" + to_string(std::get<0
 template <typename A, typename B, typename C, typename D>
 std::string to_string(std::tuple<A, B, C, D> p) { return "(" + to_string(std::get<0>(p)) + ", " + to_string(std::get<1>(p)) + ", " + to_string(std::get<2>(p)) + ", " + to_string(std::get<3>(p)) + ")"; }
 }  // namespace std
-inline void debug_out() { std::cerr << "\033[39m"
+inline void debug_out() { std::cerr << "\033[0m"
                                     << "\n"; }
 template <typename Head, typename... Tail>
 void debug_out(Head H, Tail... T) {
@@ -67,6 +67,6 @@ void debug_out(Head H, Tail... T) {
     debug_out(T...);
 }
 
-#define debug(...) std::cerr << "\033[92mLINE(" << __LINE__ << ") [" << __FUNCTION__ << "] -> " \
+#define debug(...) std::cerr << "\033[1;31mLINE(" << __LINE__ << ") [" << __FUNCTION__ << "] -> " \
                              << "[" << #__VA_ARGS__ << "]:",                                    \
                    debug_out(__VA_ARGS__)
