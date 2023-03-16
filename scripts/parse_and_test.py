@@ -9,7 +9,6 @@ Options:
   -h --help                     Show this screen.
   --echo                        Just echo received responses and exit.
   --dryrun                      Don't actually create any problems
-  -t , --test                   Test solution.
   -c , --clean                  Clean sample input and output.
   -m , --make_problem           Make problem folder only.
 
@@ -36,7 +35,6 @@ import os
 # import shutil
 
 # Returns unmarshalled or None
-root_name = "PROBLEM_NAME"
 lang = "Cpp"
 
 
@@ -134,7 +132,6 @@ def save_samples(data, prob_dir, name):
 
 # Providing name = '.'
 def make_prob(data, name=None):
-    global root_name
     global lang
     if name is None:
         name = get_prob_name(data)
@@ -145,8 +142,6 @@ def make_prob(data, name=None):
     # Using current dir, set sample name by problem in save_samples
     prob_dir = Path(".")
 
-    if root_name == "PROBLEM_NAME" and name is not None:
-        root_name = name
     file_name = name + "." + lang
     if os.path.exists(file_name):
         print(f"Already created problem {name}...")
@@ -156,7 +151,7 @@ def make_prob(data, name=None):
         MAKE_PROB = Path(sys.path[0]) / "make_problem.sh"
         try:
             subprocess.check_call(
-                [MAKE_PROB, name, root_name, lang], stdout=sys.stdout, stderr=sys.stderr
+                [MAKE_PROB, name, lang], stdout=sys.stdout, stderr=sys.stderr
             )
         except subprocess.CalledProcessError as e:
             print(f"Got error {e}")
@@ -195,7 +190,7 @@ def prepare_build():
         os.mkdir("build")
 
     os.chdir("build")
-    os.system("cmake .. && make all")
+    os.system("cmake .. && make template")
 
 
 def main():
@@ -231,7 +226,6 @@ def main():
             make_prob(*args, **kwargs)
 
         if names := arguments["<name>"]:
-            # root_name = names[0]
             if test_problem:
                 run_prob(names)
             elif not make_prob_only:

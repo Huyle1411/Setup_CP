@@ -14,3 +14,11 @@ set(CMAKE_CXX_FLAGS "${CXXFLAGS} ${DEBUG_CXXFLAGS} ${DEBUG_LOCAL_CXXFLAGS}")
 
 # generate compilation database
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
+
+include_directories(./)
+add_executable(template template.cpp)
+target_precompile_headers(template
+    PUBLIC
+      /usr/include/x86_64-linux-gnu/c++/11/bits/stdc++.h
+  )
+
