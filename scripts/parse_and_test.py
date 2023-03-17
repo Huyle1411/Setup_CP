@@ -216,7 +216,6 @@ def main():
     else:
         dryrun = arguments["--dryrun"]
         make_prob_only = arguments["--make_problem"]
-        test_problem = arguments["--test"]
 
         def run_make_prob(*args, **kwargs):
             nonlocal dryrun
@@ -226,9 +225,7 @@ def main():
             make_prob(*args, **kwargs)
 
         if names := arguments["<name>"]:
-            if test_problem:
-                run_prob(names)
-            elif not make_prob_only:
+            if not make_prob_only:
                 datas = listen_many(num_items=len(names))
                 for data, name in zip(datas, names):
                     run_make_prob(data, name)
